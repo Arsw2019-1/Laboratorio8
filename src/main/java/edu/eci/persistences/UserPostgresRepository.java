@@ -74,10 +74,7 @@ public class UserPostgresRepository implements IUserRepository {
 
     }
 
-    @Override
-    public void remove(Long id) {
 
-    }
 
     @Bean
     public DataSource dataSource() throws SQLException {
@@ -88,5 +85,10 @@ public class UserPostgresRepository implements IUserRepository {
             config.setJdbcUrl(dbUrl);
             return new HikariDataSource(config);
         }
+    }
+
+    @Override
+    public void remove(UUID id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

@@ -1,5 +1,6 @@
 package edu.eci.persistences;
 
+import edu.eci.models.Car;
 import edu.eci.models.User;
 import edu.eci.persistences.repositories.IUserRepository;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -17,11 +18,13 @@ import static java.util.stream.Collectors.toList;
 public class UserMemoryRepository implements IUserRepository{
 
     public static List<User> usersContainer;
+    
     public static List<User> getContainer(){
         if(UserMemoryRepository.usersContainer == null)
             UserMemoryRepository.usersContainer = new ArrayList<>();
         return UserMemoryRepository.usersContainer;
     }
+    
 
     @Override
     public User getUserByUserName(String userName) {
@@ -68,11 +71,17 @@ public class UserMemoryRepository implements IUserRepository{
                 .collect(toList());
     }
 
+
     @Override
-    public void remove(Long id) {
-        UserMemoryRepository.usersContainer = UserMemoryRepository.getContainer()
+    public void remove(UUID id) {
+               UserMemoryRepository.usersContainer = UserMemoryRepository.getContainer()
                 .stream()
                 .filter(u -> !u.getId().equals(id))
                 .collect(toList());
     }
+/**
+    @Override
+    public Car getCarByLicencePlate(String licencePlate) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }*/
 }
